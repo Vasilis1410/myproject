@@ -8,33 +8,43 @@ import Search from "./Search";
 
 
 
-class FilterableProductTable extends React.Component{
-    constructor(props){
+class FilterableProductTable extends React.Component {
+    constructor(props) {
         super(props)
-        this.state={
-            value: ""
-        }
+        this.state = {
+            value: "",
+            OnStock: false
+        };
     }
 
-    OnHandleText = (e) =>{
+    OnHandleText = (value) => {
         this.setState({
-            value:e
+            value: value
         });
 
     }
 
-    render(){
-        return(
+    OnHandleStock = (OnStock) => {
+        this.setState({
+            OnStock: OnStock
+        })
+    }
+
+    render() {
+        return (
             <>
                 <div>
                     <Search
-                       OnHandleText={this.OnHandleText}
-                       value={this.state.value} />
+                        OnHandleText={this.OnHandleText}
+                        value={this.state.value}
+                        OnStock={this.state.OnStock}
+                        OnHandleStock={this.OnHandleStock} />
                 </div>
                 <div>
-                    <ProductTable 
-                        product = {this.props.product}
-                        filterText = {this.state.filterText}/>
+                    <ProductTable
+                        product={this.props.product}
+                        filterText={this.state.value}
+                        InStock = {this.state.OnStock} />
                 </div>
             </>
         );
